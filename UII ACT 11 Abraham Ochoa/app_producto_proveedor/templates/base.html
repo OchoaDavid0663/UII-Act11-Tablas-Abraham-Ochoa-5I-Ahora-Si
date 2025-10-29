@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Similares - Sistema de Inventario{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="main-header">
+            <h1><a href="{% url 'app_producto_proveedor:listar_proveedores' %}">🏪 Similares</a></h1>
+            <nav class="main-nav">
+                <a href="{% url 'app_producto_proveedor:listar_proveedores' %}">📋 Proveedores</a>
+                <a href="{% url 'app_producto_proveedor:listar_productos' %}">📦 Productos</a>
+                <a href="{% url 'app_producto_proveedor:crear_proveedor' %}">➕ Nuevo Proveedor</a>
+                <a href="{% url 'app_producto_proveedor:crear_producto' %}">🆕 Nuevo Producto</a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            {% block contenido %}{% endblock %}
+        </main>
+
+        <footer class="main-footer">
+            <p>© 2024 Similares - Sistema de Gestión de Inventarios</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block titulo %}{{ titulo }} | Similares{% endblock %}
+
+{% block contenido %}
+<div class="form-container">
+    <h2>{{ titulo }}</h2>
+    <form method="post" class="form-styled">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="{% url 'app_producto_proveedor:listar_proveedores' %}" class="btn">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

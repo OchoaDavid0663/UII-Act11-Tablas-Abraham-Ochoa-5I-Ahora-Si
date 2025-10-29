@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block titulo %}{{ proveedor.nombre_empresa }} | Similares{% endblock %}
+
+{% block contenido %}
+<article class="detail-container">
+    <div class="detail-header">
+        <div class="detail-info">
+            <h1>{{ proveedor.nombre_empresa }}</h1>
+            <div class="contact-info">
+                <p><strong>Contacto:</strong> {{ proveedor.contacto }}</p>
+                <p><strong>Teléfono:</strong> {{ proveedor.telefono }}</p>
+                <p><strong>Email:</strong> {{ proveedor.email }}</p>
+                <p><strong>Dirección:</strong> {{ proveedor.direccion }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-actions">
+        <a href="{% url 'app_producto_proveedor:editar_proveedor' proveedor.id %}" class="btn btn-secondary">✏️ Editar</a>
+        <a href="{% url 'app_producto_proveedor:borrar_proveedor' proveedor.id %}" class="btn btn-danger">🗑️ Borrar</a>
+    </div>
+
+    <section class="related-section">
+        <h2>Productos de este Proveedor</h2>
+        {% if productos %}
+        <ul class="product-grid">
+            {% for producto in productos %}
+            <li class="product-card">
+                <a href="{% url 'app_producto_proveedor:detalle_producto' producto.id %}">
+                    {% if producto.foto_producto %}
+                    <img src="{{ producto.foto_producto.url }}" alt="{{ producto.nombre }}" class="product-img">
+                    {% else %}
+                    <div class="product-placeholder">📦</div>
+                    {% endif %}
+                    <h4>{{ producto.nombre }}</h4>
+                    <p class="product-price">${{ producto.precio }}</p>
+                    <p class="product-stock">Stock: {{ producto.stock }}</p>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty-message">Este proveedor no tiene productos registrados.</p>
+        {% endif %}
+    </section>
+</article>
+{% endblock %}
